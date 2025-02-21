@@ -23,7 +23,7 @@ public class MorsoBehavior : NetworkBehaviour
         SetOpacity(0f); // Use this for Morso
     }
 
-    [ServerRpc(RunLocally = true)]
+    [ServerRpc(RunLocally = true, RequireOwnership = false)]
     private void SetOpacityServerRpc(float value)
     {
         float prevValue = _opacity.Value;
@@ -38,34 +38,44 @@ public class MorsoBehavior : NetworkBehaviour
         var renderer = GetComponentInChildren<MeshRenderer>();
         if (renderer != null)
         {
-            Debug.Log($"Opacity changed from {prev} to {next}");
             var color = renderer.material.color;
             color.a = next;
             renderer.material.color = color;
-            renderer.enabled = next > 0; // Disable renderer if opacity is 0
-        }
-        else
-        {
-            Debug.LogError("No renderer found");
+            renderer.enabled = next > 0; // Disable renderer so that we hide all visual effects
         }
     }
 
     public void SetOpacity(float value)
     {
-        if (IsOwner)
-        {
-            SetOpacityServerRpc(value);
-        }
+        SetOpacityServerRpc(value);
     }
 
-    public void SetFullOpacity()
+    public void ToggleOpacity()
     {
-        SetOpacity(1f);
+        SetOpacityServerRpc(_opacity.Value == 0f ? 1f : 0f);
     }
 
     public void OnInteract(InputAction.CallbackContext context)
     {
         if (!IsOwner || context.phase != InputActionPhase.Started) { return; }
-        SetOpacity(_opacity.Value == 0f ? 1f : 0f);
+
+        // Testing how to trigger other object's method
+        GameObject otherObject = GameObject.Find("Player(Clone)"); // TODO: figure out a nicer way to find the player
+        if (otherObject != null)
+        {
+            MorsoBehavior otherMorsoBehavior = otherObject.GetComponent<MorsoBehavior>();
+            if (otherMorsoBehavior != null)
+            {
+                otherMorsoBehavior.ToggleOpacity();
+            }
+            else
+            {
+                Debug.LogWarning($"MorsoBehavior not found.");
+            }
+        }
+        else
+        {
+            Debug.LogWarning($"GameObject not found.");
+        }
     }
 }
