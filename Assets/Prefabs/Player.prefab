@@ -201,6 +201,7 @@ GameObject:
   - component: {fileID: 7778528094371154459}
   - component: {fileID: 1240451972058275279}
   - component: {fileID: 6188491522843161158}
+  - component: {fileID: 4034625093122179229}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -427,7 +428,7 @@ MonoBehaviour:
     m_ActionName: 'Player/Interact[/Keyboard/e]'
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 3289460153175470288}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: Health, Assembly-CSharp
         m_MethodName: TakeDamage
         m_Mode: 4
@@ -566,3 +567,19 @@ MonoBehaviour:
   _componentIndexCache: 3
   _addedNetworkObject: {fileID: -6173839221679899668}
   _networkObjectCache: {fileID: -6173839221679899668}
+--- !u!114 &4034625093122179229
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7615268950159125098}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a9dd19f385ce454b863ada3974086e4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _componentIndexCache: 255
+  _addedNetworkObject: {fileID: -6173839221679899668}
+  _networkObjectCache: {fileID: 0}
+  _maxHealth: 100
