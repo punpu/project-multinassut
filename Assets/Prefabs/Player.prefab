@@ -200,6 +200,7 @@ GameObject:
   - component: {fileID: 5734116642923893155}
   - component: {fileID: 7778528094371154459}
   - component: {fileID: 1240451972058275279}
+  - component: {fileID: 3289460153175470288}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -409,7 +410,19 @@ MonoBehaviour:
     m_ActionId: 852140f2-7766-474d-8707-702459ba45f3
     m_ActionName: 'Player/Interact[/Keyboard/e]'
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 3289460153175470288}
+        m_TargetAssemblyTypeName: Health, Assembly-CSharp
+        m_MethodName: TakeDamage
+        m_Mode: 4
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 12
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: 27c5f898-bc57-4ee1-8800-db469aca5fe3
     m_ActionName: 'Player/Crouch[/Keyboard/c]'
   - m_PersistentCalls:
@@ -522,3 +535,19 @@ MonoBehaviour:
   _moveLerpSpeed: 50
   _jumpVelocity: 5
   _playerThirdPersonMesh: {fileID: 0}
+--- !u!114 &3289460153175470288
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7615268950159125098}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a9dd19f385ce454b863ada3974086e4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _componentIndexCache: 255
+  _addedNetworkObject: {fileID: -6173839221679899668}
+  _networkObjectCache: {fileID: 0}
+  _maxHealth: 100
