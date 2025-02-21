@@ -20,7 +20,7 @@ public class MorsoBehavior : NetworkBehaviour
 
     public override void OnOwnershipClient(NetworkConnection prevOwner)
     {
-        SetOpacity(0f); // Use this for Morso
+        ModifyOpacity(0f); // Use this for Morso
     }
 
     [ServerRpc(RunLocally = true, RequireOwnership = false)]
@@ -45,9 +45,9 @@ public class MorsoBehavior : NetworkBehaviour
         }
     }
 
-    public void SetOpacity(float value)
+    public void ModifyOpacity(float change)
     {
-        SetOpacityServerRpc(value);
+        SetOpacityServerRpc(Mathf.Clamp(_opacity.Value + change, 0f, 1f));
     }
 
     public void ToggleOpacity()
@@ -66,7 +66,7 @@ public class MorsoBehavior : NetworkBehaviour
             MorsoBehavior otherMorsoBehavior = otherObject.GetComponent<MorsoBehavior>();
             if (otherMorsoBehavior != null)
             {
-                otherMorsoBehavior.ToggleOpacity();
+                otherMorsoBehavior.ModifyOpacity(0.2f);
             }
             else
             {
