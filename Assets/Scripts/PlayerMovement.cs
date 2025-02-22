@@ -16,7 +16,7 @@ public class PlayerMovement : NetworkBehaviour
     [SerializeField] private float _moveLerpSpeed = 50f;
     [SerializeField] private float _jumpVelocity = 5f; 
 
-    // [SerializeField] private Animator _playerAnimator; 
+    [SerializeField] private Animator _playerAnimator; 
     // [SerializeField] private Animator _firstPersonAnimator; 
     [SerializeField] private SkinnedMeshRenderer _playerThirdPersonMesh; 
     // [SerializeField] private GameObject _playerFirstPersonArms; 
@@ -96,8 +96,8 @@ public class PlayerMovement : NetworkBehaviour
         finalMovement += new Vector3(0f, _verticalVelocity, 0f);
         _characterController.Move(finalMovement * tickDelta);
 
-        // // Movement animation
-        // _playerAnimator.SetFloat("VelocityHorizontal", _currentHorizontalMovement.magnitude);
+        // Movement animation
+        _playerAnimator.SetFloat("Velocity", _currentHorizontalMovement.magnitude);
         // _playerAnimator.SetBool("IsGrounded", isGrounded);
     }
 
