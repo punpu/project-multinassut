@@ -16,7 +16,6 @@ public class PlayerUI : MonoBehaviour
     {
         if (_ammoUI)
         {
-            Debug.Log($"SetAmmo, value: {value}");
             _ammoUI.SetText(value.ToString());
         }
     }

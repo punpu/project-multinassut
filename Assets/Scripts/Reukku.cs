@@ -74,7 +74,6 @@ public class Reukku : NetworkBehaviour
   {
     if (_playerUI && base.IsOwner)
     {
-      Debug.Log($"Reukku SetAmmo: {_ammo}");
       _playerUI.SetAmmo(_ammo);
     }
   }
