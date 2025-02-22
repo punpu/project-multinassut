@@ -80,7 +80,6 @@ public class GameManager : NetworkBehaviour
                 Debug.Log("Morsoing player");
                 player.GetComponent<MorsoBehavior>().enabled = true;
                 player.GetComponent<Reukku>().enabled = false;
-                player.GetComponent<Lantern>().enabled = false;
             }
             
             Debug.Log("Teleporting player");
