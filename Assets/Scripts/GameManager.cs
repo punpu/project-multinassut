@@ -48,16 +48,26 @@ public class GameManager : NetworkBehaviour
         }
     }
 
+    [Server]
+    private int RandomizeMorsoProperty()
+    {
+        System.Random random = new System.Random();
+        int randomIndex = random.Next(0, PlayerDatas.Count);
+        return PlayerDatas[randomIndex].connId;
+    }
+
     [ServerRpc(RequireOwnership = false)]
     public void StartGame()
     {
+
+        int morsoedConnection = RandomizeMorsoProperty();
         //send message to all clients to start game
-        RpcStartGame();
+        RpcStartGame(morsoedConnection);
         Debug.Log("Game started");
     }
 
-    [ObserversRpc]
-    private void RpcStartGame()
+    [ObserversRpc(BufferLast = true)]
+    private void RpcStartGame(int morsoedConnection)
     {
         Debug.Log("Game started on client");
         // Add client-side logic to handle game start here
@@ -65,12 +75,15 @@ public class GameManager : NetworkBehaviour
         Debug.Log("Player object count" + playerObject.Length);
         foreach (var player in playerObject)
         {
-            Debug.Log("Player object found" + player);
-            //if(OwnerId == player.GetComponent<NetworkObject>().OwnerId)
-            //{
-                Debug.Log("Teleporting player");
+            if(morsoedConnection == player.GetComponent<NetworkObject>().OwnerId)
+            {
+                Debug.Log("Morsoing player");
+                player.GetComponent<MorsoBehavior>().enabled = true;
+                player.GetComponent<Reukku>().enabled = false;
+            }
+            
+            Debug.Log("Teleporting player");
             player.GetComponent<Teleport>().TeleportPlayer();
-            //}
         }
     }
     [Server]
@@ -90,10 +103,6 @@ public class GameManager : NetworkBehaviour
             return;
         } else {
             PlayerDatas[Id] = Pd;
-        }
-        if(PlayerDatas.Count > 1)
-        {
-            StartGame();
         }
         Debug.Log(PlayerDatas.Count);
     }
