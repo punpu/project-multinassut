@@ -6,7 +6,7 @@ public class Health : NetworkBehaviour
 {
     [SerializeField] private float _maxHealth = 100f;
 
-    private readonly SyncVar<float> _health = new SyncVar<float>(new SyncTypeSettings(WritePermission.ClientUnsynchronized, ReadPermission.ExcludeOwner));
+    private readonly SyncVar<float> _health = new SyncVar<float>();
 
     private void Awake()
     {
@@ -20,10 +20,18 @@ public class Health : NetworkBehaviour
 
     private void OnHealthChange(float prev, float next, bool asServer)
     {
-        var objectName = gameObject.name;
-        Debug.Log(objectName + " health changed to " + next);
+        if (asServer) {
+            var objectName = gameObject.name;
+            Debug.Log(objectName + " health changed to " + next);
+            
+            // TODO: handle player death differently
+            if (next <= 0) {
+                Debug.Log(objectName + " died");
+                base.Despawn();
+            }
+        }
     }
 
-    [ServerRpc(RunLocally = true, RequireOwnership = false)] public void TakeDamage(float damage) => _health.Value -= damage;
+    [ServerRpc(RequireOwnership = false)] public void TakeDamage(float damage) => _health.Value -= damage;
 
 }

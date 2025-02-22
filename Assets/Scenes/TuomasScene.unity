@@ -158,6 +158,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1293111772426134907, guid: 361a937f45e434f4b91774b299b0161a, type: 3}
+      propertyPath: <SceneId>k__BackingField
+      value: 3195201149
+      objectReference: {fileID: 0}
     - target: {fileID: 5939355973462413973, guid: 361a937f45e434f4b91774b299b0161a, type: 3}
       propertyPath: m_LocalPosition.x
       value: -1.46
@@ -494,6 +498,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1293111772426134907, guid: 361a937f45e434f4b91774b299b0161a, type: 3}
+      propertyPath: <SceneId>k__BackingField
+      value: 3141002477
+      objectReference: {fileID: 0}
     - target: {fileID: 5939355973462413973, guid: 361a937f45e434f4b91774b299b0161a, type: 3}
       propertyPath: m_LocalPosition.x
       value: -6.84
@@ -612,6 +620,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1293111772426134907, guid: 361a937f45e434f4b91774b299b0161a, type: 3}
+      propertyPath: <SceneId>k__BackingField
+      value: 4210737127
+      objectReference: {fileID: 0}
     - target: {fileID: 5939355973462413973, guid: 361a937f45e434f4b91774b299b0161a, type: 3}
       propertyPath: m_LocalPosition.x
       value: -3.57
