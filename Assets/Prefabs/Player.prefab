@@ -203,6 +203,7 @@ GameObject:
   - component: {fileID: 6188491522843161158}
   - component: {fileID: 4034625093122179229}
   - component: {fileID: 2798574153295749996}
+  - component: {fileID: 6000361045981607874}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -248,6 +249,7 @@ MonoBehaviour:
   - {fileID: 7778528094371154459}
   - {fileID: 1240451972058275279}
   - {fileID: 6188491522843161158}
+  - {fileID: 4034625093122179229}
   InitializedParentNetworkBehaviour: {fileID: 0}
   InitializedNestedNetworkObjects: []
   RuntimeParentNetworkBehaviour: {fileID: 0}
@@ -273,7 +275,7 @@ MonoBehaviour:
   _spectatorInterpolation: 2
   _enableTeleport: 0
   _teleportThreshold: 1
-  <PrefabId>k__BackingField: 2
+  <PrefabId>k__BackingField: 3
   <SpawnableCollectionId>k__BackingField: 0
   <AssetPathHash>k__BackingField: 7807759643866311769
   <SceneId>k__BackingField: 0
@@ -592,9 +594,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a9dd19f385ce454b863ada3974086e4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _componentIndexCache: 255
+  _componentIndexCache: 4
   _addedNetworkObject: {fileID: -6173839221679899668}
-  _networkObjectCache: {fileID: 0}
+  _networkObjectCache: {fileID: -6173839221679899668}
   _maxHealth: 100
 --- !u!114 &2798574153295749996
 MonoBehaviour:
@@ -612,3 +614,17 @@ MonoBehaviour:
   _fireRate: 0.5
   weaponRange: 5000
   explosion: {fileID: 3472610112860324909, guid: a1eb4036cce264fd7b9742a275d449c8, type: 3}
+  _weaponDamage: 10
+--- !u!114 &6000361045981607874
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7615268950159125098}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 569bf22c0deb6466aba0bee02b3c70b8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _teleportPosition: {fileID: 0}
