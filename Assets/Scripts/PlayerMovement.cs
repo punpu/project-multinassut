@@ -97,7 +97,10 @@ public class PlayerMovement : NetworkBehaviour
         _characterController.Move(finalMovement * tickDelta);
 
         // Movement animation
-        _playerAnimator.SetFloat("Velocity", _currentHorizontalMovement.magnitude);
+        if (_playerAnimator)
+        {
+            _playerAnimator.SetFloat("Velocity", _currentHorizontalMovement.magnitude);
+        }
         // _playerAnimator.SetBool("IsGrounded", isGrounded);
     }
 
