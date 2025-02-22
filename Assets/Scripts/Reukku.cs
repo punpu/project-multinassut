@@ -22,6 +22,11 @@ public class Reukku : MonoBehaviour
       if (Physics.Raycast(_cameraTransform.position, _cameraTransform.forward, out hit, weaponRange))
       {
         Debug.Log("Reukku hit " + hit.transform.name);
+        if(hit.transform.name == "ReadyCube")
+        {
+          gameObject.GetComponent<Teleport>().TeleportPlayer();
+          Debug.Log("Reukku hit ready cube");
+        }
         var decal = Instantiate(explosion, hit.point, Quaternion.identity);
         Destroy(decal, 0.5f);
 
