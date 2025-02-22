@@ -2,79 +2,92 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using FishNet.Object;
 using FishNet.Connection;
-using FishNet.Managing.Logging;
-using FishNet.Object;
-using FishNet.Object.Prediction;
 using FishNet.Object.Synchronizing;
-using FishNet.Serializing.Helping;
-using FishNet.Transporting;
+using System.Collections;
 
 public class Lantern : NetworkBehaviour
 {
-    private const float MIN_BATTERY = 0f;
-    private const float MAX_BATTERY = 1f;
-    private readonly SyncVar<bool> _isOn = new SyncVar<bool>(new SyncTypeSettings(WritePermission.ClientUnsynchronized, ReadPermission.ExcludeOwner));
-    // private readonly SyncVar<float> _battery = new SyncVar<float>(new SyncTypeSettings(WritePermission.ClientUnsynchronized, ReadPermission.ExcludeOwner));
-    private float _battery = 1f;
+    private const bool INITIAL_SWITCHED_ON = false;
+    private const int LIGHT_INTENSITY_OFF = 0;
+    private const int LIGHT_INTENSITY_ON = 300;
+    private const int MIN_BATTERY = 0;
+    private const int MAX_BATTERY = 10;
+    private readonly SyncVar<bool> _isSwitchedOn = new SyncVar<bool>(new SyncTypeSettings(WritePermission.ClientUnsynchronized, ReadPermission.ExcludeOwner));
+    private int _battery = MAX_BATTERY;
 
     private void Awake()
     {
-        _isOn.OnChange += on_isOn;
-        // _battery.OnChange += on_battery;
+        _isSwitchedOn.OnChange += OnIsSwitchedOn;
     }
 
-    // private void on_battery(float prev, float next, bool asServer)
-    // {
-    //     Debug.Log($"Battery hanged from {prev} to {next}");
-    //     if (next <= MIN_BATTERY)
-    //     {
-    //         Debug.Log("Lantern is out of battery");
-    //     }
-    // }
-
-    private void on_isOn(bool prev, bool next, bool asServer)
+    void Start()
     {
-        Debug.Log($"Lantern is turned {(next ? "on" : "off")}");
-        // if ()
+        StartCoroutine(BatteryUpdate());
     }
 
-    // [ServerRpc(RunLocally = true, RequireOwnership = false)]
-    // private void SetBatteryServerRpc(float value)
-    // {
-    //     float prevValue = _battery.Value;
-    //     _battery.Value = value;
-    //     on_battery(prevValue, value, true); // Manually invoke the callback
-    // }
+    IEnumerator BatteryUpdate() {
+        while (true) {
+            if (_isSwitchedOn.Value && _battery > MIN_BATTERY)
+            {
+                ModifyBattery(-2);
+            }
+            else if (!_isSwitchedOn.Value && _battery < MAX_BATTERY)
+            {
+                ModifyBattery(1);
+            }
+            yield return new WaitForSeconds(1);
+        }    
+    }
+
+    private void OnIsSwitchedOn(bool prev, bool next, bool asServer)
+    {
+        if (next && _battery <= MIN_BATTERY)
+        {
+            Debug.Log("Battery empty!");
+            return;
+        }
+        var spotLight = GetComponentInChildren<Light>();
+        if (spotLight)
+        {
+            spotLight.intensity = next ? LIGHT_INTENSITY_ON : LIGHT_INTENSITY_OFF;
+        }
+        else
+        {
+            Debug.LogWarning("SpotLight missing!");
+        }
+    }
 
     [ServerRpc(RunLocally = true, RequireOwnership = false)]
     private void SetIsOnServerRpc(bool value)
     {
-        Debug.Log($"SetIsOnServerRpc, value: {value}");
         if (value && _battery <= MIN_BATTERY)
         {
             Debug.Log("Lantern is out of battery");
             return;
         }
-        var prevValue = _isOn.Value;
-        _isOn.Value = value;
-        on_isOn(prevValue, value, true); // Manually invoke the callback
+        var prevValue = _isSwitchedOn.Value;
+        _isSwitchedOn.Value = value;
+        OnIsSwitchedOn(prevValue, value, true); // Manually invoke the callback
     }
 
     public override void OnOwnershipClient(NetworkConnection prevOwner)
     {
-        // ModifyBattery(1f); // Set Lantern fully charged by default
+        SetIsOnServerRpc(INITIAL_SWITCHED_ON);
     }
 
-    public void ModifyBattery(float change)
+    public void ModifyBattery(int deltaBattery)
     {
-        // SetBatteryServerRpc(Mathf.Clamp(_battery.Value + change, MIN_BATTERY, MAX_BATTERY));
+        _battery = Mathf.Clamp(_battery + deltaBattery, MIN_BATTERY, MAX_BATTERY);
+        if (_battery <= MIN_BATTERY)
+        {
+            SetIsOnServerRpc(false);
+        }
     }
 
     public void ToggleLight()
     {
-        SetIsOnServerRpc(!_isOn.Value);
+        SetIsOnServerRpc(!_isSwitchedOn.Value);
     }
-
 
     public void OnInteract(InputAction.CallbackContext context)
     {
