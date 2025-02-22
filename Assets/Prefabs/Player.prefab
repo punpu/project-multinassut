@@ -204,6 +204,7 @@ GameObject:
   - component: {fileID: 4034625093122179229}
   - component: {fileID: 2798574153295749996}
   - component: {fileID: 6000361045981607874}
+  - component: {fileID: -7227983352585082230}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -413,7 +414,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 2798574153295749996}
         m_TargetAssemblyTypeName: Reukku, Assembly-CSharp
-        m_MethodName: onFire
+        m_MethodName: OnFire
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -525,6 +526,22 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: 9caa3d8a-6b2f-4e8e-8bad-6ede561bd9be
     m_ActionName: UI/TrackedDeviceOrientation
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: -7227983352585082230}
+        m_TargetAssemblyTypeName: Melee, Assembly-CSharp
+        m_MethodName: OnFire
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: d6824341-eb9c-44ee-b7ba-c36094e5ae68
+    m_ActionName: 'Player/Attack2[/Mouse/rightButton]'
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: Keyboard&Mouse
   m_DefaultActionMap: Player
@@ -614,7 +631,7 @@ MonoBehaviour:
   _fireRate: 0.5
   weaponRange: 5000
   explosion: {fileID: 3472610112860324909, guid: a1eb4036cce264fd7b9742a275d449c8, type: 3}
-  _weaponDamage: 10
+  _weaponDamage: 1
 --- !u!114 &6000361045981607874
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -628,3 +645,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _teleportPosition: {fileID: 0}
+--- !u!114 &-7227983352585082230
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7615268950159125098}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5781099aae42f47e0bfcbd0b5e783da6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _cameraTransform: {fileID: 2709960717613358348}
+  _fireRate: 1
+  weaponRange: 1.5
+  explosion: {fileID: 3472610112860324909, guid: a1eb4036cce264fd7b9742a275d449c8, type: 3}
+  _weaponDamage: 2
