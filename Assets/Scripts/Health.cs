@@ -8,9 +8,20 @@ public class Health : NetworkBehaviour
 
     private readonly SyncVar<float> _health = new SyncVar<float>();
 
+    private PlayerUI _playerUI;
+
     private void Awake()
     {
         _health.OnChange += OnHealthChange;
+        _playerUI = GetComponentInChildren<PlayerUI>();
+    }
+
+    public void Update()
+    {
+        if (_playerUI)
+        {
+            _playerUI.SetHealth(_health.Value);
+        }
     }
 
     public override void OnStartServer()

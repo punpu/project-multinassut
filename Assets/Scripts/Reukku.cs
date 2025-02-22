@@ -8,6 +8,8 @@ public class Reukku : MonoBehaviour
   [SerializeField] private float weaponRange = 5000f;
   [SerializeField] private GameObject explosion;
   [SerializeField] private float _weaponDamage = 10f;
+  [SerializeField] private int _ammo = 6; // TODO: update this when Reukku is fired
+  private PlayerUI _playerUI;
 
   private float _nextFireTime = 0f;
 
@@ -55,12 +57,15 @@ public class Reukku : MonoBehaviour
   // Start is called once before the first execution of Update after the MonoBehaviour is created
   void Start()
   {  
-       
+    _playerUI = GetComponentInChildren<PlayerUI>();
   }
 
   // Update is called once per frame
   void Update()
   {
-        
+    if (_playerUI)
+    {
+        _playerUI.SetAmmo(_ammo);
+    }
   }
 }
