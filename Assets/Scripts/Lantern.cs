@@ -7,7 +7,7 @@ using System.Collections;
 
 public class Lantern : NetworkBehaviour
 {
-    private const bool INITIAL_SWITCHED_ON = false;
+    private const bool INITIAL_SWITCHED_ON_VALUE = false;
     private const int LIGHT_INTENSITY_OFF = 0;
     private const int LIGHT_INTENSITY_ON = 300;
     private const int MIN_BATTERY = 0;
@@ -41,20 +41,20 @@ public class Lantern : NetworkBehaviour
 
     private void OnIsSwitchedOn(bool prev, bool next, bool asServer)
     {
-        if (next && _battery <= MIN_BATTERY)
-        {
-            Debug.Log("Battery empty!");
-            return;
-        }
         var spotLight = GetComponentInChildren<Light>();
-        if (spotLight)
-        {
-            spotLight.intensity = next ? LIGHT_INTENSITY_ON : LIGHT_INTENSITY_OFF;
-        }
-        else
+        var collider = GetComponentInChildren<MeshCollider>();
+        if (!spotLight)
         {
             Debug.LogWarning("SpotLight missing!");
+            return;
         }
+        if (!collider)
+        {
+            Debug.LogWarning("Collider missing!");
+            return;
+        }
+        spotLight.intensity = next ? LIGHT_INTENSITY_ON : LIGHT_INTENSITY_OFF;
+        collider.enabled = next;
     }
 
     [ServerRpc(RunLocally = true, RequireOwnership = false)]
@@ -62,7 +62,7 @@ public class Lantern : NetworkBehaviour
     {
         if (value && _battery <= MIN_BATTERY)
         {
-            Debug.Log("Lantern is out of battery");
+            // Lantern is out of battery
             return;
         }
         var prevValue = _isSwitchedOn.Value;
@@ -72,7 +72,7 @@ public class Lantern : NetworkBehaviour
 
     public override void OnOwnershipClient(NetworkConnection prevOwner)
     {
-        SetIsOnServerRpc(INITIAL_SWITCHED_ON);
+        SetIsOnServerRpc(INITIAL_SWITCHED_ON_VALUE);
     }
 
     public void ModifyBattery(int deltaBattery)
