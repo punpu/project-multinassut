@@ -33,7 +33,9 @@ public class Reukku : MonoBehaviour
         Debug.Log("Reukku hit " + hit.transform.name);
         if(hit.transform.name == "ReadyCube")
         {
-          gameObject.GetComponent<Teleport>().TeleportPlayer();
+          //gameObject.GetComponent<Teleport>().TeleportPlayer();
+          var gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+          gameManager.StartGame();
           Debug.Log("Reukku hit ready cube");
         }
         var decal = Instantiate(explosion, hit.point, Quaternion.identity);
