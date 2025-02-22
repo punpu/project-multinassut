@@ -1,8 +1,11 @@
 using FishNet;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using FishNet.Object;
+using FishNet.Connection;
+using FishNet.Object.Synchronizing;
 
-public class Reukku : MonoBehaviour
+public class Reukku : NetworkBehaviour
 {    
   [SerializeField] private Transform _cameraTransform;
   [SerializeField] private float _fireRate = 0.5f; 
@@ -69,8 +72,9 @@ public class Reukku : MonoBehaviour
   // Update is called once per frame
   void Update()
   {
-    if (_playerUI)
+    if (_playerUI && base.IsOwner)
     {
+      Debug.Log($"Reukku SetAmmo: {_ammo}");
       _playerUI.SetAmmo(_ammo);
     }
   }
