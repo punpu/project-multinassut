@@ -7,10 +7,13 @@ public class Teleport : MonoBehaviour
 
     public void TeleportPlayer()
     {
+        Debug.Log("Teleporting player");
         var respawns = GameObject.FindGameObjectsWithTag("Respawn");
         foreach (GameObject respawn in respawns)
         {
+            Debug.Log("Teleporting player to respawn");
           transform.position = respawn.transform.position;
+
         }
     }
 
