@@ -7,6 +7,7 @@ public class Reukku : MonoBehaviour
   [SerializeField] private float _fireRate = 0.5f; 
   [SerializeField] private float weaponRange = 5000f;
   [SerializeField] private GameObject explosion;
+  [SerializeField] private float _weaponDamage = 10f;
 
   private float _nextFireTime = 0f;
 
@@ -21,8 +22,10 @@ public class Reukku : MonoBehaviour
       if (Physics.Raycast(_cameraTransform.position, _cameraTransform.forward, out hit, weaponRange))
       {
         Debug.Log("Reukku hit " + hit.transform.name);
-        var pafka = Instantiate(explosion, hit.point, Quaternion.identity);
-        Destroy(pafka, 0.5f);
+        var decal = Instantiate(explosion, hit.point, Quaternion.identity);
+        Destroy(decal, 0.5f);
+
+        hit.transform.GetComponent<Health>().TakeDamage(_weaponDamage);
       }
       else
       {
