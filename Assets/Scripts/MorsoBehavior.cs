@@ -11,6 +11,8 @@ using UnityEngine.InputSystem;
 
 public class MorsoBehavior : NetworkBehaviour
 {
+    private const float MIN_OPACITY = 0f;
+    private const float MAX_OPACITY = 0.9f;
     private readonly SyncVar<float> _opacity = new SyncVar<float>(new SyncTypeSettings(WritePermission.ClientUnsynchronized, ReadPermission.ExcludeOwner));
 
     private void Awake()
@@ -20,7 +22,7 @@ public class MorsoBehavior : NetworkBehaviour
 
     public override void OnOwnershipClient(NetworkConnection prevOwner)
     {
-        ModifyOpacity(0f); // Use this for Morso
+        ModifyOpacity(0f); // Set Morso invisible by default
     }
 
     [ServerRpc(RunLocally = true, RequireOwnership = false)]
@@ -47,19 +49,19 @@ public class MorsoBehavior : NetworkBehaviour
 
     public void ModifyOpacity(float change)
     {
-        SetOpacityServerRpc(Mathf.Clamp(_opacity.Value + change, 0f, 1f));
+        SetOpacityServerRpc(Mathf.Clamp(_opacity.Value + change, MIN_OPACITY, MAX_OPACITY));
     }
 
     public void ToggleOpacity()
     {
-        SetOpacityServerRpc(_opacity.Value == 0f ? 1f : 0f);
+        SetOpacityServerRpc(_opacity.Value == MIN_OPACITY ? MAX_OPACITY : MIN_OPACITY);
     }
 
+    // Testing how to call other object's method
     public void OnInteract(InputAction.CallbackContext context)
     {
         if (!IsOwner || context.phase != InputActionPhase.Started) { return; }
 
-        // Testing how to trigger other object's method
         GameObject otherObject = GameObject.Find("Player(Clone)"); // TODO: figure out a nicer way to find the player
         if (otherObject != null)
         {
@@ -76,6 +78,26 @@ public class MorsoBehavior : NetworkBehaviour
         else
         {
             Debug.LogWarning($"GameObject not found.");
+        }
+    }
+
+    void OnTriggerEnter (Collider other)
+    {
+        // Check if light is hitting Morso
+        if (other.gameObject.CompareTag("Light"))
+        {
+            Debug.Log($"Morso trigger, isLight");
+            ModifyOpacity(1f);
+        }
+    }
+
+    void OnTriggerExit (Collider other)
+    {
+        // Check if light is leaving Morso
+        if (other.gameObject.CompareTag("Light"))
+        {
+            Debug.Log($"Morso trigger, isLight");
+            ModifyOpacity(-1f);
         }
     }
 }
