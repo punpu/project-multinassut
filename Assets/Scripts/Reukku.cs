@@ -88,7 +88,7 @@ public class Reukku : NetworkBehaviour
     if (other.gameObject.CompareTag("AmmoPickup") && _ammo < MAX_AMMO)
     {
       SetAmmo(_ammo + AMMO_PICKUP_AMOUNT);
-      InstanceFinder.ServerManager.Despawn(other.gameObject);
+      other.gameObject.GetComponent<AmmoPickup>().OnPickUp();
     }
   }
 }
