@@ -18,7 +18,7 @@ public class Health : NetworkBehaviour
 
     public void Update()
     {
-        if (_playerUI)
+        if (_playerUI && base.IsOwner)
         {
             _playerUI.SetHealth(_health.Value);
         }
