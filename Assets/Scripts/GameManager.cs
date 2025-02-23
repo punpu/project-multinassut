@@ -82,6 +82,7 @@ public class GameManager : NetworkBehaviour
                 Destroy(player.GetComponent<Reukku>());
                 // set morso health as 1000
                 player.GetComponent<Health>().TakeDamage(-900);
+                player.GetComponent<MorsoBehavior>().ModifyOpacity(-1f);
             } else {
                 Destroy(player.GetComponent<MorsoBehavior>());
             }

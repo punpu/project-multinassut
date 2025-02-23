@@ -17,7 +17,7 @@ public class MorsoBehavior : NetworkBehaviour
 
     public override void OnOwnershipClient(NetworkConnection prevOwner)
     {
-        ModifyOpacity(-1f); // Set Morso invisible by default
+        // ModifyOpacity(-1f); // Set Morso invisible by default
     }
 
     [ServerRpc(RunLocally = true, RequireOwnership = false)]
