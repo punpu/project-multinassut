@@ -32,17 +32,20 @@ public class MorsoBehavior : NetworkBehaviour
     // and then synchronized to the clients.
     private void OnOpacity(float prev, float next, bool asServer)
     {
-        var renderer = GetComponentInChildren<MeshRenderer>();
+        var renderer = GetComponentInChildren<SkinnedMeshRenderer>();
         if (renderer != null)
         {
-            var color = renderer.material.color;
-            color.a = next;
-            renderer.material.color = color;
-            renderer.enabled = next > 0; // Disable renderer so that we hide all visual effects
+            foreach (var material in renderer.materials)
+            {
+                var color = material.color;
+                color.a = next;
+                material.color = color;
+                renderer.enabled = next > 0; // Disable renderer so that we hide all visual effects
+            }
         }
         else
         {
-            Debug.LogWarning("Mesh renderer missing!");
+            Debug.LogWarning("Skinned Mesh renderer missing!");
         }
     }
 
