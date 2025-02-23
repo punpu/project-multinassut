@@ -424,6 +424,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: AudioManager
       objectReference: {fileID: 0}
+    - target: {fileID: 2043529025552656497, guid: 7af86e48bb2f9ad49893dffa9a93ff1a, type: 3}
+      propertyPath: <SceneId>k__BackingField
+      value: 2180725181
+      objectReference: {fileID: 0}
     - target: {fileID: 6892680712130936032, guid: 7af86e48bb2f9ad49893dffa9a93ff1a, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

@@ -1,23 +1,23 @@
+using System.Collections.Generic;
 using UnityEngine;
-
-public class AudioManager : MonoBehaviour
-{
-     //[Heaader("AudioSources")] 
+using FishNet.Object;
+using FishNet.Connection;
+using FishNet.Object.Synchronizing;
+public class AudioManager : NetworkBehaviour {
+    
     public AudioSource musicSource;
     public AudioSource sfxSource;
-
-    //[Heaader("AudioClips")] 
     public AudioClip mainBackgroundMusic;
+    public AudioClip reukkuShot;
+    public AudioClip hngh;
 
     public static AudioManager instance;
 
-    private void Awake() 
+    private Dictionary<string, AudioClip> sfxDict = new Dictionary<string, AudioClip>();
+    private void Awake()
     {
-        if (instance == null) 
-        {
-            instance = this;
-            DontDestroyOnLoad(gameObject);
-        }    
+        sfxDict.Add("hngh", hngh);
+        sfxDict.Add("reukku-shot", reukkuShot); 
     }
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -38,19 +38,51 @@ public class AudioManager : MonoBehaviour
     public void StopMusic()
     {
         if(musicSource != null)
-        {
+        { 
             musicSource.Stop();
         }
     }
 
-    public void PlaySfx(AudioClip audioClip) 
+    public void ChangeTrack(AudioClip clip)
     {
-
+        musicSource.clip = clip; 
     }
 
-    // Update is called once per frame
-    void Update()
+    public void PlaySfx_old(AudioClip sfxClip) 
+    {
+        if(sfxSource != null && sfxClip != null) 
+        {
+            sfxSource.PlayOneShot(sfxClip);
+        }
+    }
+
+    public void test()
     {
         
+    }
+
+    public void PlaySfx(string sfxName, Vector3 location)
+    {
+        Debug.Log("Playing sound");
+        SendEnvSound(sfxName, location);
+    }   
+
+    [ServerRpc(RequireOwnership = false)]
+    private void SendEnvSound(string sfxName, Vector3 location) 
+    {
+        Debug.Log("Playing sound");
+        playEnvSfx(sfxName, location);
+    }
+
+    [ObserversRpc]
+    //[ObserversRpc(ExcludeOwner = true)]
+    private void playEnvSfx(string sfxName, Vector3 location)
+    {
+        Debug.Log("Playing sound over network");
+        if(sfxDict.ContainsKey(sfxName))
+        {
+            AudioClip clip = sfxDict[sfxName];
+            AudioSource.PlayClipAtPoint(clip, location);
+        }
     }
 }

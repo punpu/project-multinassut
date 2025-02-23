@@ -17,10 +17,18 @@ public class Reukku : NetworkBehaviour
   private int _ammo; // TODO: update this when Reukku is fired
   private PlayerUI _playerUI;
   private float _nextFireTime = 0f;
-
+  private AudioManager _audioManager;
+  private void Awake()
+  {
+    _audioManager = GameObject.Find("AudioManager").GetComponent<AudioManager>();
+  }
   public void OnFire(InputAction.CallbackContext context)
   {
+    var position = transform.position;
+    _audioManager.PlaySfx("reukku-shot", position);
+
     if (Time.time >= _nextFireTime && _ammo > 0)
+
     {
       _ammo -= 1;
       _nextFireTime = Time.time + _fireRate;
