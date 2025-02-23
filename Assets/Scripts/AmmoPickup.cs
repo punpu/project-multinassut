@@ -1,11 +1,27 @@
 using UnityEngine;
+using FishNet;
+using FishNet.Object;
+using FishNet.Connection;
+using FishNet.Object.Synchronizing;
 
-public class AmmoPickup : MonoBehaviour
+public class AmmoPickup : NetworkBehaviour
 {
-    public float speed = 20f;
+    public float rotationSpeed = 20f;
 
     public void Update()
     {
-        transform.Rotate(speed * Time.deltaTime * Vector3.up);
+        transform.Rotate(rotationSpeed * Time.deltaTime * Vector3.up);
+    }
+
+    [ServerRpc(RequireOwnership = false)]
+    public void OnPickUp()
+    {
+        var parent = transform.parent.gameObject;
+        if (!parent)
+        {
+            Debug.LogWarning("AmmoPickup parent not found!");
+            return;
+        }
+        parent.GetComponent<AmmoSpawner>().DespawnAmmoPickup(gameObject);
     }
 }
