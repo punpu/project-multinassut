@@ -1222,7 +1222,7 @@ MonoBehaviour:
   _fireRate: 0.5
   weaponRange: 5000
   explosion: {fileID: 3472610112860324909, guid: a1eb4036cce264fd7b9742a275d449c8, type: 3}
-  _weaponDamage: 1
+  _weaponDamage: 25
 --- !u!114 &6000361045981607874
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1252,7 +1252,7 @@ MonoBehaviour:
   _fireRate: 1
   weaponRange: 1.5
   explosion: {fileID: 3472610112860324909, guid: a1eb4036cce264fd7b9742a275d449c8, type: 3}
-  _weaponDamage: 2
+  _weaponDamage: 25
 --- !u!114 &8558736524770720922
 MonoBehaviour:
   m_ObjectHideFlags: 0
