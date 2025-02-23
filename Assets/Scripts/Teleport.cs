@@ -13,7 +13,7 @@ public class Teleport : MonoBehaviour
         var playerObjects = GameObject.FindGameObjectsWithTag("Player");
         foreach (var player in playerObjects)
         {
-            if(player.GetComponent<MorsoBehavior>().enabled == true)     
+            if(player.GetComponent<MorsoBehavior>())     
             {
                 var morsoRespawns = GameObject.FindGameObjectsWithTag("MorsoSpawnFloor");
                //teleport player to a random location on one of the respawn points
