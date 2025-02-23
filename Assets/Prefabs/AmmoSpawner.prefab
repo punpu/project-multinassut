@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 134342635330061850}
   - component: {fileID: 8227710376053364259}
-  - component: {fileID: 7802917349838210418}
+  - component: {fileID: -4324605311883597035}
   m_Layer: 0
   m_Name: AmmoSpawner
   m_TagString: Untagged
@@ -45,11 +45,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3cf8bf758309d486a974117c66f4c02e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _componentIndexCache: 255
-  _addedNetworkObject: {fileID: 7802917349838210418}
+  _componentIndexCache: 0
+  _addedNetworkObject: {fileID: -4324605311883597035}
   _networkObjectCache: {fileID: 0}
   ammoPrefab: {fileID: 8956617363141304507, guid: 694ac791e8abae74fa3d8276c27c5547, type: 3}
---- !u!114 &7802917349838210418
+--- !u!114 &-4324605311883597035
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
