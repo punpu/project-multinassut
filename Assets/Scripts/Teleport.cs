@@ -19,13 +19,13 @@ public class Teleport : MonoBehaviour
                //teleport player to a random location on one of the respawn points
                 var morsoSpawnLocation = morsoRespawns[UnityEngine.Random.Range(0, morsoRespawns.Length)];
                 Debug.Log("Teleporting Morso player");
-                transform.position = morsoSpawnLocation.transform.position;
+                transform.position = morsoSpawnLocation.transform.position + new Vector3(0, 1, 0);
             } else {
                 var respawns = GameObject.FindGameObjectsWithTag("Respawn");
                 //teleport player to a random location on one of the respawn points
                 var spawnLocation = respawns[UnityEngine.Random.Range(0, respawns.Length)];
                 Debug.Log("Teleporting player");
-                transform.position = spawnLocation.transform.position;
+                transform.position = spawnLocation.transform.position + new Vector3(0, 1, 0);
             }
         }
     }
