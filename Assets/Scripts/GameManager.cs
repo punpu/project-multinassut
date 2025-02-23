@@ -78,9 +78,10 @@ public class GameManager : NetworkBehaviour
             if(morsoedConnection == player.GetComponent<NetworkObject>().OwnerId)
             {
                 Debug.Log("Morsoing player");
-                player.GetComponent<MorsoBehavior>().enabled = true;
                 player.GetComponentInChildren<Light>().enabled = false;
                 Destroy(player.GetComponent<Reukku>());
+            } else {
+                Destroy(player.GetComponent<MorsoBehavior>());
             }
             
             Debug.Log("Teleporting player");

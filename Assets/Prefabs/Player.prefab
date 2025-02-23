@@ -608,7 +608,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a6a39c46bf52104ba8efe3100bce3f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _componentIndexCache: 5
+  _componentIndexCache: 6
   _addedNetworkObject: {fileID: -6173839221679899668}
   _networkObjectCache: {fileID: -6173839221679899668}
 --- !u!1 &7570719012215739400
@@ -813,6 +813,7 @@ MonoBehaviour:
   - {fileID: 1240451972058275279}
   - {fileID: 6188491522843161158}
   - {fileID: 4034625093122179229}
+  - {fileID: 2798574153295749996}
   - {fileID: 6450083772179888639}
   InitializedParentNetworkBehaviour: {fileID: 0}
   InitializedNestedNetworkObjects:
@@ -840,7 +841,7 @@ MonoBehaviour:
   _spectatorInterpolation: 2
   _enableTeleport: 0
   _teleportThreshold: 1
-  <PrefabId>k__BackingField: 4
+  <PrefabId>k__BackingField: 5
   <SpawnableCollectionId>k__BackingField: 0
   <AssetPathHash>k__BackingField: 7807759643866311769
   <SceneId>k__BackingField: 0
@@ -1192,6 +1193,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d565ba273499b4c5fbbb8330cb1b9bfc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _componentIndexCache: 5
+  _addedNetworkObject: {fileID: -6173839221679899668}
+  _networkObjectCache: {fileID: -6173839221679899668}
   _cameraTransform: {fileID: 2709960717613358348}
   _fireRate: 0.5
   weaponRange: 5000
