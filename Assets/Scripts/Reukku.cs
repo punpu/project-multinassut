@@ -18,9 +18,6 @@ public class Reukku : NetworkBehaviour
   private PlayerUI _playerUI;
   private float _nextFireTime = 0f;
   private AudioManager _audioManager;
-
-
-  private float _nextFireTime = 0f;
   private void Awake()
   {
     _audioManager = GameObject.Find("AudioManager").GetComponent<AudioManager>();
