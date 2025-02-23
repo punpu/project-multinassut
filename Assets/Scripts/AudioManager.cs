@@ -48,23 +48,19 @@ public class AudioManager : NetworkBehaviour {
         musicSource.clip = clip; 
     }
 
-    public void PlaySfx_old(AudioClip sfxClip) 
-    {
-        if(sfxSource != null && sfxClip != null) 
-        {
-            sfxSource.PlayOneShot(sfxClip);
-        }
-    }
-
-    public void test()
-    {
-        
-    }
-
     public void PlaySfx(string sfxName, Vector3 location)
     {
         Debug.Log("Playing sound");
         SendEnvSound(sfxName, location);
+    }
+
+    public void PlayLocalSfx(string sfxName) 
+    {
+        if (sfxDict.ContainsKey(sfxName))
+        {
+            AudioClip clip = sfxDict[sfxName];
+            sfxSource.PlayOneShot(clip);
+        }
     }   
 
     [ServerRpc(RequireOwnership = false)]
@@ -82,6 +78,7 @@ public class AudioManager : NetworkBehaviour {
         if(sfxDict.ContainsKey(sfxName))
         {
             AudioClip clip = sfxDict[sfxName];
+            // Why does this work without object reference :DD
             AudioSource.PlayClipAtPoint(clip, location);
         }
     }
