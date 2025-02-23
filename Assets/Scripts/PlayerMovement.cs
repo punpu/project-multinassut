@@ -10,6 +10,7 @@ using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(CharacterController))]
 [RequireComponent(typeof(PlayerInput))]
+
 public class PlayerMovement : NetworkBehaviour
 {
     [SerializeField] private float _moveSpeed = 5f;
@@ -26,10 +27,12 @@ public class PlayerMovement : NetworkBehaviour
     private bool _jumpQueued;
     private float _verticalVelocity;
     private Vector3 _currentHorizontalMovement;
+    private AudioManager _audioManager;
 
     private void Awake()
     {
         _characterController = GetComponent<CharacterController>();
+        _audioManager = GameObject.Find("AudioManager").GetComponent<AudioManager>();
     }
 
     void Update()
@@ -84,6 +87,8 @@ public class PlayerMovement : NetworkBehaviour
         {
             _jumpQueued = false;
             _verticalVelocity = _jumpVelocity;
+            var position = transform.position;
+            _audioManager.PlaySfx("hngh", position);
         }
         if (isGrounded && _verticalVelocity < 0f)
         {
