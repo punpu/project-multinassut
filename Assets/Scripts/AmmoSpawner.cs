@@ -20,8 +20,7 @@ public class AmmoSpawner : NetworkBehaviour
 
     public override void OnSpawnServer(NetworkConnection connection)
     {
-        RandomizeSpawnTime();
-        Invoke("SpawnAmmo", _spawnTime);
+        SpawnAmmo();
     }
 
     private void RandomizeSpawnTime()
