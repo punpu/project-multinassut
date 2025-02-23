@@ -36,9 +36,9 @@ public class Melee : MonoBehaviour
         Destroy(decal, 0.5f);
 
         Debug.Log("Melee hit " + hit.transform.name);
-        if(hit.transform.GetComponent<Health>())
+        if(hit.transform.GetComponentInParent<Health>())
         {
-        hit.transform.GetComponent<Health>().TakeDamage(_weaponDamage);
+        hit.transform.GetComponentInParent<Health>().TakeDamage(_weaponDamage);
         }
       }
       else
