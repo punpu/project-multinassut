@@ -66,7 +66,7 @@ public class GameManager : NetworkBehaviour
         Debug.Log("Game started");
     }
 
-    [ObserversRpc(BufferLast = true)]
+    [ObserversRpc]
     private void RpcStartGame(int morsoedConnection)
     {
         Debug.Log("Game started on client");
@@ -79,7 +79,8 @@ public class GameManager : NetworkBehaviour
             {
                 Debug.Log("Morsoing player");
                 player.GetComponent<MorsoBehavior>().enabled = true;
-                player.GetComponent<Reukku>().enabled = false;
+                player.GetComponentInChildren<Light>().enabled = false;
+                Destroy(player.GetComponent<Reukku>());
             }
             
             Debug.Log("Teleporting player");
