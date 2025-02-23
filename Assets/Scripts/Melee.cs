@@ -35,7 +35,10 @@ public class Melee : MonoBehaviour
         var decal = Instantiate(explosion, hit.point, Quaternion.identity);
         Destroy(decal, 0.5f);
 
+        if(hit.transform.GetComponent<Health>())
+        {
         hit.transform.GetComponent<Health>().TakeDamage(_weaponDamage);
+        }
       }
       else
       {
