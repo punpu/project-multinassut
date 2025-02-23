@@ -21,6 +21,7 @@ public class AudioManager : NetworkBehaviour
     public static AudioManager instance;
 
     private Dictionary<string, AudioClip> sfxDict = new Dictionary<string, AudioClip>();
+    private Dictionary<string, AudioClip> musicDict = new Dictionary<string, AudioClip>();
     private void Awake()
     {
         sfxDict.Add("hngh", hngh);
@@ -32,20 +33,20 @@ public class AudioManager : NetworkBehaviour
         sfxDict.Add("walking", walking);
         sfxDict.Add("miss", miss);
 
+        musicDict.Add("mainBgMusic", mainBackgroundMusic);
     }
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    
+    public void PlayMusic(string musicName)
     {
-        PlayMusic(mainBackgroundMusic);
-    }
-
-    public void PlayMusic(AudioClip musicClip)
-    {
-        if (musicSource != null && musicClip != null)
+        if (musicSource != null)
         {
-            musicSource.clip = musicClip;
-            musicSource.loop = true;
-           //musicSource.Play();
+
+            if (sfxDict.ContainsKey(musicName))
+            {
+                musicSource.clip = musicDict[musicName];
+                musicSource.loop = true;
+                musicSource.Play();
+            }
         }
     }
 
@@ -118,13 +119,8 @@ public class AudioManager : NetworkBehaviour
         Debug.Log("Playing sound over network " + sfxName);
         if (sfxDict.ContainsKey(sfxName))
         {
-            Debug.Log("AUDIOOOO");
             AudioClip clip = sfxDict[sfxName];
             AudioSource.PlayClipAtPoint(clip, location);
-        }
-        else 
-        {
-            Debug.Log("NOU AUDIOOOO");
         }
     }
 }

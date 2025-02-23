@@ -17,9 +17,14 @@ public class GameManager : NetworkBehaviour
         public string name;
         public GameObject player;
     }
+    private AudioManager _audioManager;
 
     private readonly SyncDictionary<int, PlayerData> PlayerDatas = new();
 
+    private void Awake()
+    {
+        _audioManager = GameObject.Find("AudioManager").GetComponent<AudioManager>();
+    }
     public override void OnSpawnServer(NetworkConnection connection)
     {
         base.OnSpawnServer(connection);
@@ -59,11 +64,11 @@ public class GameManager : NetworkBehaviour
     [ServerRpc(RequireOwnership = false)]
     public void StartGame()
     {
-
         int morsoedConnection = RandomizeMorsoProperty();
         //send message to all clients to start game
         RpcStartGame(morsoedConnection);
         Debug.Log("Game started");
+        _audioManager.PlayMusic("mainBgMusic");
     }
 
     [ObserversRpc]

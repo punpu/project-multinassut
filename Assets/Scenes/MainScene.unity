@@ -527,6 +527,30 @@ PrefabInstance:
       propertyPath: <SceneId>k__BackingField
       value: 3069180907
       objectReference: {fileID: 0}
+    - target: {fileID: 5547890616392835613, guid: 7af86e48bb2f9ad49893dffa9a93ff1a, type: 3}
+      propertyPath: auh
+      value: 
+      objectReference: {fileID: 8300000, guid: fecb4148c7999854f85652a46bb38df7, type: 3}
+    - target: {fileID: 5547890616392835613, guid: 7af86e48bb2f9ad49893dffa9a93ff1a, type: 3}
+      propertyPath: hit
+      value: 
+      objectReference: {fileID: 8300000, guid: 7b27ae9dce025634fb75aee118169e33, type: 3}
+    - target: {fileID: 5547890616392835613, guid: 7af86e48bb2f9ad49893dffa9a93ff1a, type: 3}
+      propertyPath: miss
+      value: 
+      objectReference: {fileID: 8300000, guid: 8986fcc60bfe1eb44a69ae591e95ded8, type: 3}
+    - target: {fileID: 5547890616392835613, guid: 7af86e48bb2f9ad49893dffa9a93ff1a, type: 3}
+      propertyPath: morso
+      value: 
+      objectReference: {fileID: 8300000, guid: 88f7dd9917e9f8240be47edc908bc7f3, type: 3}
+    - target: {fileID: 5547890616392835613, guid: 7af86e48bb2f9ad49893dffa9a93ff1a, type: 3}
+      propertyPath: hitWall
+      value: 
+      objectReference: {fileID: 8300000, guid: 289eda67e8faccc4fa97c3f6d74fd042, type: 3}
+    - target: {fileID: 5547890616392835613, guid: 7af86e48bb2f9ad49893dffa9a93ff1a, type: 3}
+      propertyPath: walking
+      value: 
+      objectReference: {fileID: 8300000, guid: dc7ec629117c44245a3831dd64625b6a, type: 3}
     - target: {fileID: 6892680712130936032, guid: 7af86e48bb2f9ad49893dffa9a93ff1a, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
