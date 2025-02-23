@@ -48,7 +48,7 @@ MonoBehaviour:
   _componentIndexCache: 255
   _addedNetworkObject: {fileID: 7802917349838210418}
   _networkObjectCache: {fileID: 0}
-  ammoPrefab: {fileID: 0}
+  ammoPrefab: {fileID: 8956617363141304507, guid: 694ac791e8abae74fa3d8276c27c5547, type: 3}
 --- !u!114 &7802917349838210418
 MonoBehaviour:
   m_ObjectHideFlags: 0
