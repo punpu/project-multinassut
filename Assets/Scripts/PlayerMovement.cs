@@ -28,7 +28,6 @@ public class PlayerMovement : NetworkBehaviour
     private float _verticalVelocity;
     private Vector3 _currentHorizontalMovement;
     private AudioManager _audioManager;
-
     private void Awake()
     {
         _characterController = GetComponent<CharacterController>();
@@ -71,6 +70,9 @@ public class PlayerMovement : NetworkBehaviour
         if (inputDirection.magnitude > 0f)
         {
             targetMovement = inputDirection.normalized * _moveSpeed;
+            var position = transform.position;
+            Debug.Log("Walking");
+            _audioManager.PlayContinuosSfx("walking", position);
         }
         // no slowing down if mid air
         else if (!isGrounded)

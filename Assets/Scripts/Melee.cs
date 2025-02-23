@@ -10,6 +10,11 @@ public class Melee : MonoBehaviour
   [SerializeField] private float _weaponDamage = 10f;
 
   private float _nextFireTime = 0f;
+  private AudioManager _audioManager;
+  private void Awake()
+  {
+    _audioManager = GameObject.Find("AudioManager").GetComponent<AudioManager>();
+  }
 
   public void OnFire(InputAction.CallbackContext context)
   {
@@ -24,6 +29,7 @@ public class Melee : MonoBehaviour
         if(hit.distance > weaponRange)
         {
           Debug.Log("Out of range");
+          _audioManager.PlayLocalSfx("miss");
           return;
         }
         Debug.Log("Melee hit " + hit.transform.name);
@@ -39,11 +45,17 @@ public class Melee : MonoBehaviour
         if(hit.transform.GetComponentInParent<Health>())
         {
         hit.transform.GetComponentInParent<Health>().TakeDamage(_weaponDamage);
+          _audioManager.PlayLocalSfx("hit");
+        }
+        else 
+        {
+          _audioManager.PlayLocalSfx("hit-wall");
         }
       }
       else
       {
         Debug.Log("Melee missed");
+        _audioManager.PlayLocalSfx("miss");
       }
     }
     else
