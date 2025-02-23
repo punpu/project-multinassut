@@ -37,8 +37,17 @@ public class Health : NetworkBehaviour
             
             // TODO: handle player death differently
             if (next <= 0) {
-                Debug.Log(objectName + " died");
-                base.Despawn();
+
+                if(gameObject.tag == "Player") {
+                    TakeDamage(-100);
+                    Debug.Log("PLAYER DEATH");
+                    gameObject.GetComponent<Teleport>().TeleportPlayer();
+                }
+                else {
+                    Debug.Log(objectName + " died");
+                    base.Despawn();
+                }
+
             }
         }
     }
