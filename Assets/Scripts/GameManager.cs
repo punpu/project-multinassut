@@ -80,6 +80,8 @@ public class GameManager : NetworkBehaviour
                 Debug.Log("Morsoing player");
                 player.GetComponentInChildren<Light>().enabled = false;
                 Destroy(player.GetComponent<Reukku>());
+                // set morso health as 1000
+                player.GetComponent<Health>().TakeDamage(-900);
             } else {
                 Destroy(player.GetComponent<MorsoBehavior>());
             }
