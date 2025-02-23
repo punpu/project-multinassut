@@ -85,6 +85,7 @@ public class GameManager : NetworkBehaviour
                 player.GetComponent<MorsoBehavior>().ModifyOpacity(-1f);
             } else {
                 Destroy(player.GetComponent<MorsoBehavior>());
+                Destroy(player.GetComponent<Melee>());
             }
             
             Debug.Log("Teleporting player");
