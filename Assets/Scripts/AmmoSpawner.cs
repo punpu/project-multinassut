@@ -4,6 +4,7 @@ using FishNet.Object;
 using FishNet.Connection;
 using FishNet.Object.Synchronizing;
 
+// DEPRECATED, USE AMMO PICKUP INSTEAD!
 public class AmmoSpawner : NetworkBehaviour
 {
     public GameObject ammoPrefab;
