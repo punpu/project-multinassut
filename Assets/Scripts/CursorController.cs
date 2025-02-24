@@ -29,7 +29,7 @@ public class CursorController : MonoBehaviour
     {
         if (Cursor.lockState == CursorLockMode.None)
         {
-            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.lockState = CursorLockMode.Confined;
             if (_fishNetHud != null)
             {
                 _fishNetHud.SetActive(false);
