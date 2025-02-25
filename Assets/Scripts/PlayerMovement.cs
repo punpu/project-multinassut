@@ -28,11 +28,12 @@ public class PlayerMovement : NetworkBehaviour
     private float _verticalVelocity;
     private Vector3 _currentHorizontalMovement;
     private AudioManager _audioManager;
-
+    private ObjectAudioManager _objectAudioManager;
     private void Awake()
     {
         _characterController = GetComponent<CharacterController>();
         _audioManager = GameObject.Find("AudioManager").GetComponent<AudioManager>();
+        _objectAudioManager = gameObject.GetComponent<ObjectAudioManager>();
     }
 
     void Update()
@@ -40,6 +41,10 @@ public class PlayerMovement : NetworkBehaviour
         if (IsOwner)
         {
             Move();
+        }
+        Vector3 inputDirection = transform.TransformDirection(new Vector3(_moveInput.x, 0f, _moveInput.y));
+        if(inputDirection.magnitude == 0f) {
+            _audioManager.StopObjectSfx("walking", gameObject);
         }
     }
 
@@ -71,11 +76,15 @@ public class PlayerMovement : NetworkBehaviour
         if (inputDirection.magnitude > 0f)
         {
             targetMovement = inputDirection.normalized * _moveSpeed;
+            var position = transform.position;
+
+            _audioManager.PlayObjectSfx("walking", gameObject.GetComponent<NetworkObject>());
         }
         // no slowing down if mid air
         else if (!isGrounded)
         {
             targetMovement = _currentHorizontalMovement;
+            _audioManager.StopObjectSfx("walking", gameObject);
         }
 
         // Update movement with inertia
@@ -127,5 +136,4 @@ public class PlayerMovement : NetworkBehaviour
             _jumpQueued = false;
         }
     }
-
 }

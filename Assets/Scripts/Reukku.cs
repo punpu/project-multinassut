@@ -24,12 +24,11 @@ public class Reukku : NetworkBehaviour
   }
   public void OnFire(InputAction.CallbackContext context)
   {
-    var position = transform.position;
-    _audioManager.PlaySfx("reukku-shot", position);
-
     if (Time.time >= _nextFireTime && _ammo > 0)
-
     {
+      var position = transform.position;
+      _audioManager.PlaySfx("reukku-shot", position);
+      
       _ammo -= 1;
       _nextFireTime = Time.time + _fireRate;
 
