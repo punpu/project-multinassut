@@ -864,7 +864,7 @@ MonoBehaviour:
   _spectatorInterpolation: 2
   _enableTeleport: 0
   _teleportThreshold: 1
-  <PrefabId>k__BackingField: 7
+  <PrefabId>k__BackingField: 8
   <SpawnableCollectionId>k__BackingField: 0
   <AssetPathHash>k__BackingField: 7807759643866311769
   <SceneId>k__BackingField: 0
@@ -1223,6 +1223,7 @@ MonoBehaviour:
   _fireRate: 0.5
   weaponRange: 5000
   explosion: {fileID: 3472610112860324909, guid: a1eb4036cce264fd7b9742a275d449c8, type: 3}
+  visualProjectile: {fileID: 9118578757049479680, guid: 718ef45601cc31140af44fd6c10d279c, type: 3}
   _weaponDamage: 25
 --- !u!114 &6000361045981607874
 MonoBehaviour:
@@ -1584,6 +1585,10 @@ PrefabInstance:
     - target: {fileID: 3681369622760859929, guid: 9843e883bfed2470fa751f59fa20a656, type: 3}
       propertyPath: <IsNested>k__BackingField
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3681369622760859929, guid: 9843e883bfed2470fa751f59fa20a656, type: 3}
+      propertyPath: <PrefabId>k__BackingField
+      value: 65535
       objectReference: {fileID: 0}
     - target: {fileID: 3681369622760859929, guid: 9843e883bfed2470fa751f59fa20a656, type: 3}
       propertyPath: <ComponentIndex>k__BackingField

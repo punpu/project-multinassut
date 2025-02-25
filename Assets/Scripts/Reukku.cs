@@ -4,6 +4,7 @@ using UnityEngine.InputSystem;
 using FishNet.Object;
 using FishNet.Connection;
 using FishNet.Object.Synchronizing;
+using Unity.Cinemachine;
 
 public class Reukku : NetworkBehaviour
 {    
@@ -11,6 +12,7 @@ public class Reukku : NetworkBehaviour
   [SerializeField] private float _fireRate = 0.5f; 
   [SerializeField] private float weaponRange = 5000f;
   [SerializeField] private GameObject explosion;
+  [SerializeField] private GameObject visualProjectile;
   [SerializeField] private float _weaponDamage = 10f;
   public readonly int MAX_AMMO = 6;
   public readonly int AMMO_PICKUP_AMOUNT = 3;
@@ -24,31 +26,30 @@ public class Reukku : NetworkBehaviour
   }
   public void OnFire(InputAction.CallbackContext context)
   {
+    if(context.phase != InputActionPhase.Started) {return;}
+
     if (Time.time >= _nextFireTime && _ammo > 0)
     {
       var position = transform.position;
       _audioManager.PlaySfx("reukku-shot", position);
-      
+      if (visualProjectile != null) {
+        Instantiate(visualProjectile, _cameraTransform.position, _cameraTransform.rotation);
+      }
+
       _ammo -= 1;
       _nextFireTime = Time.time + _fireRate;
 
-      Debug.Log("Reukku is on fire");
       if (Physics.Raycast(_cameraTransform.position, _cameraTransform.forward, out RaycastHit hit, weaponRange))
       {
-        Debug.Log(hit.distance + " meters." + weaponRange + " meters.");
-        
         if (hit.distance > weaponRange)
         {
-          Debug.Log("Out of range");
           return;
         }
-        Debug.Log("Reukku hit something at " + hit.distance + " meters");
         Debug.Log("Reukku hit " + hit.transform.name);
         if (hit.transform.name == "ReadyCube")
         {
           var gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
           gameManager.StartGame();
-          Debug.Log("Reukku hit ready cube");
         }
         var decal = Instantiate(explosion, hit.point, Quaternion.identity);
         Destroy(decal, 0.5f);
@@ -62,10 +63,6 @@ public class Reukku : NetworkBehaviour
       {
         Debug.Log("Reukku missed");
       }
-    }
-    else
-    {
-      Debug.Log("Cannot fire yet. Waiting for fire rate cooldown." + _nextFireTime);
     }
   }
 
