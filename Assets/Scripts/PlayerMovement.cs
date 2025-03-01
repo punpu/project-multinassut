@@ -42,10 +42,6 @@ public class PlayerMovement : NetworkBehaviour
         {
             Move();
         }
-        Vector3 inputDirection = transform.TransformDirection(new Vector3(_moveInput.x, 0f, _moveInput.y));
-        if(inputDirection.magnitude == 0f) {
-            _audioManager.StopObjectSfx("walking", gameObject);
-        }
     }
 
     public override void OnOwnershipClient(NetworkConnection prevOwner)
